@@ -1,0 +1,28 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "sa-webapp-build" 
+spec:
+  runPolicy: "Serial" 
+  # triggers: 
+  #   -
+  #     type: "GitHub"
+  #     github:
+  #       secret: "secret101"
+  #   - type: "Generic"
+  #     generic:
+  #       secret: "secret101"
+  #   -
+  #     type: "ImageChange"
+  source: 
+    git:
+      uri: "https://github.com/rinormaloku/sa-webapp"
+    type: Git
+  strategy: 
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+    type: Docker 
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "sa-webapp:latest"
